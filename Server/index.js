@@ -5,19 +5,17 @@ const morgan = require('morgan')
 const path = require('path');
 const { default: axios } = require('axios');
 app.use(morgan('dev'));
-// const aws = require('aws-sdk');
-// const config = require('./config.json')
-
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 app.use(express.static(PUBLIC_DIR))
 
 
-app.get('/sleepData', (req, res) => {
+app.get('/sleepData/:userId', (req, res) => {
+  console.log('the user', req.params)
     const getSleepData = () => {
-        axios.get('https://s3.amazonaws.com/eight-public/challenge/d6c1355e38194139b8d0c870baf86365.json')
+        axios.get(`https://s3.amazonaws.com/eight-public/challenge/${req.params.userId}.json`)
         .then((response) => {
-          res.send(response.data)
+          res.send(response.data.intervals)
         })
         .catch((err) => {
           console.error(err);
