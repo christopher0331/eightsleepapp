@@ -29,17 +29,18 @@ class LogInScreen extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="login">
+                <h1 style={{color: 'white'}}>Sign In</h1>
                 <form onSubmit={() => this.props.changeView(this.state.username, this.state.password)}>
                 <label>
                     Username:
-                    <input type="text" value={this.state.value} onChange={this.handleUsernameChange} />
+                    <input type="text" id="username" value={this.state.value} onChange={this.handleUsernameChange} />
                 </label>
                 <label>
-                    PassWord:
-                    <input type="text" value={this.state.value} onChange={this.handlePasswordChange} />
+                    Password:
+                    <input type="text" id="pwd" value={this.state.value} onChange={this.handlePasswordChange} />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" id='loginSubmit'  value="Submit" />
             </form>
             </div>
         )

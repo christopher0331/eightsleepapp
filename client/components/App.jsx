@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import OverView from './Overview.jsx';
 import LogInScreen from './LogInScreen.jsx';
+import userSignatures from '../../userSignatures.js';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
-class App extends React.Component {
+class App extends Component {
     constructor(props){
         super(props)
 
         this.state = {
-            loggedIn: '',
+            loggedIn: false,
             username: '',
             password: ''
         }
-
         this.changeView = this.changeView.bind(this);
     }
 
@@ -21,11 +22,11 @@ class App extends React.Component {
         
         if(!this.state.loggedIn){
             if(username === 'Chris'){
-                username = "f9bf229fd19e4c799e8c19a962d73449"
+                username = userSignatures.user1
             } else if(username === 'Cindy'){
-                username = "d6c1355e38194139b8d0c870baf86365"
+                username = userSignatures.user2
             } else if(username === 'Jane'){
-                username = "2228b530e055401f81ba37b51ff6f81d"
+                username = userSignatures.user3
             }
 
             this.setState({
@@ -46,7 +47,9 @@ class App extends React.Component {
         } else if(this.state.loggedIn && this.state.username){
             return(
                 <div>
+                    <Header />
                     <OverView username={this.state.username}/> 
+                    <Footer />
                 </div>
             )
         } else {
