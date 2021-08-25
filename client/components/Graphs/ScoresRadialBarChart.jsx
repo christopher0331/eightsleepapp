@@ -14,7 +14,7 @@ class ScoresRadialBarChart extends Component {
     render() {
         return(
             <div>
-                <h2>Scores: Last Three Nights</h2>
+                <h2>Scores: Last Three Nights!!</h2>
                 <RadialBarChart 
                     width={300} 
                     height={300} 

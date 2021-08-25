@@ -4,7 +4,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             let scores = [];
             const names = ["Last Night", "2 Nights Ago", "3 Nights Ago"]
-            const colors = ["lightblue", "lightgreen", "yellow"]
+            const colors = ["dodgerblue", "lightgreen", "yellow"]
 
             for(let i in array){
                 scores.push({"name": names[i], "score": array[i].score, "fill": colors[i]})

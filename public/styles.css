@@ -87,3 +87,11 @@ select {
 .footer {
     display: flex;
 }
+
+#headerImage {
+    width: 100vw;
+}
+
+body {
+    margin: 0px 0px;
+}

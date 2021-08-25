@@ -36,6 +36,7 @@ class App extends React.Component {
         if(this.state.scores.length > 0){
             return(
                 <div>
+                    <h1>Sleep Report</h1>
                     <ScoresRadialBarChart sleepScores={this.state.scores}/>
                     <SleepStages sleepStages={this.state.sleepStages}/>
                     <TimeSeries timeSeries={this.state.timeseries}/>

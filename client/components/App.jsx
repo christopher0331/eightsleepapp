@@ -46,7 +46,7 @@ class App extends Component {
             )
         } else if(this.state.loggedIn && this.state.username){
             return(
-                <div>
+                <div className='initialContainer'>
                     <Header />
                     <OverView username={this.state.username}/> 
                     <Footer />
