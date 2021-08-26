@@ -1,5 +1,4 @@
 import React from 'react';
-import userSignatures from '../../userSignatures';
 
 const DateSelector = (props) => (  
     <form className="overview" onSubmit={props.handleDateSubmit}>

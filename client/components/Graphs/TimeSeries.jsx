@@ -23,7 +23,7 @@ class TimeSeries extends React.Component {
         if(this.state.graph === 'all'){
             return (
                 <div id="selector">   
-                <Selector currentView={this.state.showHabit} updateData={this.updateData}/>
+                <Selector updateData={this.updateData}/>
                 <h2 className="title2">Sleep Statistics</h2> 
                     <LineChart 
                       width={730} 
