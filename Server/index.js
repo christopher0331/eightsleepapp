@@ -6,6 +6,7 @@ const path = require('path');
 const { default: axios } = require('axios');
 app.use(morgan('dev'));
 const dbhelpers = require('./dbhelpers.js');
+const { getTossAndTurns } = require('./dbhelpers.js');
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 app.use(express.static(PUBLIC_DIR))
 
@@ -20,9 +21,10 @@ app.get('/sleepData/:userId/:date', (req, res) => {
         const stagesData = dbhelpers.getStagesData(response.data.intervals[`${req.params.date}`].stages);
         const getPreviousScoresData = dbhelpers.getPreviousScoresData(response.data.intervals);
         const getTimeSeriesData = dbhelpers.getTimeSeriesData(response.data.intervals[`${req.params.date}`].timeseries)
-
+        const getTossandTurnData = dbhelpers.getTossAndTurns(response.data.intervals[`${req.params.date}`].timeseries.tnt)
+        
         //only use last nights data to send to client once proccessed
-        Promise.all([ getSleepStartData, stagesData, getPreviousScoresData, getTimeSeriesData])
+        Promise.all([ getSleepStartData, stagesData, getPreviousScoresData, getTimeSeriesData, getTossandTurnData])
           .then((values) => {
             res.send(values)
           })

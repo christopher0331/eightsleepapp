@@ -24,7 +24,7 @@ class SleepStages extends Component {
                         cx="50%" 
                         cy="50%" 
                         outerRadius={150} 
-                        fill='fff' 
+                        fill='black' 
                         label={true}
                         labelLine={true}
                     >

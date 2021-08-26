@@ -123,7 +123,7 @@ class TimeSeries extends React.Component {
                     </LineChart>  
                 </div>
             )
-        }
+        } 
     } 
 }
 

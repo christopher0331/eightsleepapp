@@ -22,7 +22,7 @@ class ScoresRadialBarChart extends Component {
                     outerRadius={150} 
                     startAngle={180} 
                     endAngle={0}
-                    style={{color: 'black'}}
+                    style={{color: 'black', backgroundColor: 'white'}}
                 >
                     <RadialBar minAngle={15} label={{ fill: '#666', position: 'top' }} background clockWise={true} dataKey='score' />
                     <Legend iconSize={10} width={120} height={140} layout='vertical' verticalAlign='bottom' align="center" />

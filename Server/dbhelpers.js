@@ -71,7 +71,23 @@ module.exports = {
                     "Room Temp": Math.floor(convertCelsius(array.tempRoomC[i][1])),
                     "Bed Temp": Math.floor(convertCelsius(array.tempBedC[i][1])),
                     "Respiratory Rate": Math.floor(array.respiratoryRate[i][1]),
-                    "Heart Rate": Math.floor(array.heartRate[i][1])
+                    "Heart Rate": Math.floor(array.heartRate[i][1]),
+                }
+                timeseries.push(currentTimeseries);
+            }
+            resolve(timeseries)
+        })
+    },
+
+    getTossAndTurns: (array) => {
+        let times = getSpecificTimeIntervals(array)
+        return new Promise((resolve, reject) => {
+            let timeseries = [];
+
+            for(let i = 0; i < times.length; i++){
+                let currentTimeseries = {
+                    "name": times[i],
+                    "Toss And Turns": array[i][1],
                 }
                 timeseries.push(currentTimeseries);
             }
@@ -80,6 +96,8 @@ module.exports = {
     }
 }
 
+
+// helper functions for the dbhelper functions
 function padSeriesData(controlArray, array2){
     if(controlArray.length !== array2.length){
         for(let i = 0; i < controlArray.length; i++){
@@ -97,6 +115,16 @@ function padSeriesData(controlArray, array2){
 
 function convertCelsius(integer){
     return (integer * 1.8) + 32
+}
+
+function getSpecificTimeIntervals(array){
+    let times = [];
+    for(let i = 0; i < array.length; i++){
+        let time = array[i][0].slice(11, 16);
+        times.push(time);
+    }
+
+    return times;
 }
 
 function getTimeIntervals(array){

@@ -3,9 +3,10 @@ import axios from 'axios';
 import ScoresRadialBarChart from './Graphs/ScoresRadialBarChart.jsx'
 import SleepStages from './Graphs/SleepStages.jsx';
 import TimeSeries from './Graphs/TimeSeries.jsx';
-import GeneralStats from './Graphs/GeneralStats.jsx';
 import UserSelector from './UserSelector.jsx';
 import userSignatures from '../../userSignatures.js';
+import DateSelector from './DateSelector.jsx';
+import TossAndTurns from './Graphs/TossAndTurnLine.jsx';
 
 class OverView extends React.Component {
     constructor(props){
@@ -19,28 +20,32 @@ class OverView extends React.Component {
             sleepStages: [],
             scores: [],
             timeseries: [],
+            tossAndTurns: [],
             date: 0
         }
 
         this.fetchData = this.fetchData.bind(this);
         this.changeUser = this.changeUser.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUserSubmit = this.handleUserSubmit.bind(this);
+        this.handleDateSubmit = this.handleDateSubmit.bind(this);
+        this.changeDate = this.changeDate.bind(this);
+
     }
 
 
     componentDidMount(){
-        console.log('1', this.state.signature)
         this.fetchData(this.state.signature)
      }
 
     fetchData(signature){
-        axios.get(`/sleepData/${signature}/${0}`)
+        axios.get(`/sleepData/${signature}/${this.state.date}`)
         .then((response) => {
             this.setState({
                 timeStart: response.data[0],
                 sleepStages: response.data[1],
                 scores: response.data[2],
-                timeseries: response.data[3]
+                timeseries: response.data[3],
+                tossAndTurns: response.data[4] 
             })
         })
         .catch((err) => {
@@ -66,11 +71,20 @@ class OverView extends React.Component {
                 signature: userSignatures.user3
             })
         }
-
-        
     }
     
-    handleSubmit(event) {
+    changeDate(date){
+        this.setState({
+            date: date.target.value
+        })
+    }
+
+    handleUserSubmit(event) {
+        this.fetchData(this.state.signature)
+        event.preventDefault();
+      }
+
+    handleDateSubmit(event) {
         this.fetchData(this.state.signature)
         event.preventDefault();
       }
@@ -80,27 +94,17 @@ class OverView extends React.Component {
             return(
                 <div>               
                     <div id="sleepReport">Sleep Report</div>
-                    <form className="overview" onSubmit={this.handleSubmit}>
-                        <label>
-                        Select User:
-                    <div className="userSelector">    
-                            <select value={this.state.username} onChange={this.changeUser}>
-                                <option value="Chris">Chris</option>
-                                <option value="Cindy">Cindy</option>
-                                <option value="Jane">Jane</option>
-                            </select>   
-                        </div>  
-                        <input type="submit" value="Submit" style={{width: '100px'}}/>
-                        </label>
-                    </form>
-                    
+                    <div className='selectors'>
+                        <UserSelector username={this.state.username} handleUserSubmit={this.handleUserSubmit} changeUser={this.changeUser}/>
+                        <DateSelector date={this.state.date} handleDateSubmit={this.handleDateSubmit} changeDate={this.changeDate}/>
+                    </div>
                     <div className="primaryGraphs">
                         <ScoresRadialBarChart sleepScores={this.state.scores}/>
-                        <GeneralStats />
+                        <TossAndTurns tossAndTurns={this.state.tossAndTurns}/>
                     </div>
                     <div className="secondaryGraphs">
                         <SleepStages sleepStages={this.state.sleepStages}/>
-                        <TimeSeries timeSeries={this.state.timeseries}/>
+                        <TimeSeries timeSeries={this.state.timeseries} tossAndTurns={this.state.tossAndTurns}/>
                     </div>
                 </div>
             )
