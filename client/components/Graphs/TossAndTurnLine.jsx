@@ -13,6 +13,7 @@ class TossAndTurns extends React.Component {
         }
         this.updateData = this.updateData.bind(this);
     }
+    
     updateData(series){
         this.setState({ graph: series.target.value})
     }
