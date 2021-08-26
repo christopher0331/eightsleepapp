@@ -4,6 +4,7 @@ import LogInScreen from './LogInScreen.jsx';
 import userSignatures from '../../userSignatures.js';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import { Puff } from 'react-loading-icons'
 
 class App extends Component {
     constructor(props){
@@ -61,7 +62,9 @@ class App extends Component {
             )
         } else {
             return(
-                <div>Loading...</div>
+                <div>
+                    LLLLLLL
+                </div>
             )
         }
         

@@ -7,6 +7,8 @@ import UserSelector from './UserSelector.jsx';
 import userSignatures from '../../userSignatures.js';
 import DateSelector from './DateSelector.jsx';
 import TossAndTurns from './Graphs/TossAndTurnLine.jsx';
+import { Puff } from 'react-loading-icons'
+import Circles from 'react-loading-icons/dist/components/circles';
 
 class OverView extends React.Component {
     constructor(props){
@@ -110,7 +112,10 @@ class OverView extends React.Component {
             )
         } else {
             return(
-                <div>Loading!</div>
+                <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+                    <h1 style={{display: 'flex', justifyContent: 'center', color: 'dodgerblue', fontSize: '60px'}} >Loading!</h1>
+                    <Circles stroke="#98ff98" speed={.75} style={{width: '550px', height: '550px'}}/>
+                </div>
             )
         }
     }
