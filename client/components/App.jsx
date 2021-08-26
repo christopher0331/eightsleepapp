@@ -11,27 +11,30 @@ class App extends Component {
 
         this.state = {
             loggedIn: false,
+            signature: '',
             username: '',
             password: ''
         }
+
         this.changeView = this.changeView.bind(this);
     }
 
 
     changeView(username, password){
-        
+        let signature = '';
         if(!this.state.loggedIn){
             if(username === 'Chris'){
-                username = userSignatures.user1
+                signature = userSignatures.user1
             } else if(username === 'Cindy'){
-                username = userSignatures.user2
+                signature = userSignatures.user2
             } else if(username === 'Jane'){
-                username = userSignatures.user3
+                signature = userSignatures.user3
             }
 
             this.setState({
                 loggedIn: true,
                 username: username,
+                signature: signature,
                 password: password
             })
         }
@@ -48,14 +51,13 @@ class App extends Component {
             return(
                 <div className='initialContainer'>
                     <Header />
-                    <OverView username={this.state.username}/> 
+                    <OverView signature={this.state.signature} username={this.state.username} changeView={this.changeView}/> 
                     <Footer />
                 </div>
             )
         } else {
             return(
                 <div>Loading...</div>
-
             )
         }
         

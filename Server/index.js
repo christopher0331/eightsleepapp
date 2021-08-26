@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3020;
 const morgan = require('morgan')
 const path = require('path');
 const { default: axios } = require('axios');
@@ -10,15 +10,16 @@ const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 app.use(express.static(PUBLIC_DIR))
 
 
-app.get('/sleepData/:userId', (req, res) => {
+app.get('/sleepData/:userId/:date', (req, res) => {
   const getSleepData = () => {
-      axios.get(`https://s3.amazonaws.com/eight-public/challenge/${req.params.userId}.json`)  
+      axios.get(`https://s3.amazonaws.com/eight-public/challenge/${req.params.userId}.json`)
+      
       .then((response) => {
         // pull in last nights data for all graphs except sleep score, pull in last three sleep scores
-        const getSleepStartData = response.data.intervals[0].ts;
-        const stagesData = dbhelpers.getStagesData(response.data.intervals[0].stages);
+        const getSleepStartData = response.data.intervals[`${req.params.date}`].ts;
+        const stagesData = dbhelpers.getStagesData(response.data.intervals[`${req.params.date}`].stages);
         const getPreviousScoresData = dbhelpers.getPreviousScoresData(response.data.intervals);
-        const getTimeSeriesData = dbhelpers.getTimeSeriesData(response.data.intervals[0].timeseries)
+        const getTimeSeriesData = dbhelpers.getTimeSeriesData(response.data.intervals[`${req.params.date}`].timeseries)
 
         //only use last nights data to send to client once proccessed
         Promise.all([ getSleepStartData, stagesData, getPreviousScoresData, getTimeSeriesData])
@@ -37,5 +38,6 @@ app.get('/sleepData/:userId', (req, res) => {
   getSleepData();
 
 })
+
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))

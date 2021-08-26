@@ -95,3 +95,50 @@ select {
 body {
     margin: 0px 0px;
 }
+
+#sleepReport {
+    display: flex;
+    justify-content: center;
+    font-size: 80px;
+}
+
+.radialBarChart {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -30px;
+}
+
+.title2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.secondaryGraphs {
+    display: flex;
+    flex-direction: row;
+}
+
+.primaryGraphs {
+    display: flex;
+    margin-left: 160px;
+    flex-direction: row;
+}
+
+#selector {
+    width: 400px;
+}
+
+.userSelector {
+    width: 100px;
+}
+
+.overview{
+    width: 400px;
+}

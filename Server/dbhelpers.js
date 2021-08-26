@@ -68,10 +68,10 @@ module.exports = {
             for(let i = 0; i < times.length; i++){
                 let currentTimeseries = {
                     "name": times[i],
-                    "tempRoomC": Math.floor(array.tempRoomC[i][1]),
-                    "tempBedC": Math.floor(array.tempBedC[i][1]),
-                    "respiratoryRate": Math.floor(array.respiratoryRate[i][1]),
-                    "heartRate": Math.floor(array.heartRate[i][1])
+                    "Room Temp": Math.floor(convertCelsius(array.tempRoomC[i][1])),
+                    "Bed Temp": Math.floor(convertCelsius(array.tempBedC[i][1])),
+                    "Respiratory Rate": Math.floor(array.respiratoryRate[i][1]),
+                    "Heart Rate": Math.floor(array.heartRate[i][1])
                 }
                 timeseries.push(currentTimeseries);
             }
@@ -89,16 +89,18 @@ function padSeriesData(controlArray, array2){
             if(controlArray[i][0] !== array2[i][0]){
                 array2.splice(i, 0, controlArray[i])
                 array2[i] = [controlArray[i][0], NaN]
-
             }
         }
     }
     return array2
 }
 
+function convertCelsius(integer){
+    return (integer * 1.8) + 32
+}
+
 function getTimeIntervals(array){
     let times = [];
-
     for(let i = 0; i < array.length; i++){
         let time = array[i][0].slice(11, 13);
         times.push(time);

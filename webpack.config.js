@@ -7,6 +7,10 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
+  watchOptions: {
+    ignored: /node_modules/,
+    poll: true
+  },
   module: {
     rules: [
       {

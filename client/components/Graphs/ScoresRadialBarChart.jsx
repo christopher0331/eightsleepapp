@@ -13,10 +13,10 @@ class ScoresRadialBarChart extends Component {
 
     render() {
         return(
-            <div>
-                <h2>Scores: Last Three Nights!!</h2>
+            <div className='radialBarChart'>
+                <h2 className="title">Scores</h2>
                 <RadialBarChart 
-                    width={300} 
+                    width={300}
                     height={300} 
                     data={this.props.sleepScores} 
                     outerRadius={150} 

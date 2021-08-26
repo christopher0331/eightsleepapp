@@ -31,7 +31,7 @@ class LogInScreen extends React.Component {
         return(
             <div className="login">
                 <h1 style={{color: 'white'}}>Sign In</h1>
-                <form onSubmit={() => this.props.changeView(this.state.username, this.state.password)}>
+                <form onSubmit={() => this.props.changeView(this.state.username)}>
                 <label>
                     Username:
                     <input type="text" id="username" value={this.state.value} onChange={this.handleUsernameChange} />

@@ -14,9 +14,8 @@ class SleepStages extends Component {
 
     render() {
         return(
-            <div>
-                {console.log(this.props.sleepStages)}
-                <h2>Time Spent per Stage (By Percentage)</h2>
+            <div>                
+                <h2 className="title">Time Spent per Stage (By Percentage)</h2>
                 <PieChart width={500} height={500}>
                     <Pie 
                         data={this.props.sleepStages} 
