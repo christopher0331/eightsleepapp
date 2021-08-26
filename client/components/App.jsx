@@ -21,22 +21,26 @@ class App extends Component {
 
 
     changeView(username, password){
-        let signature = '';
-        if(!this.state.loggedIn){
-            if(username === 'Chris'){
-                signature = userSignatures.user1
-            } else if(username === 'Cindy'){
-                signature = userSignatures.user2
-            } else if(username === 'Jane'){
-                signature = userSignatures.user3
+        if(username.length < 3){
+            alert("Please sign in using Chris, Cindy, or Jane. No password required.")
+        } else {
+            let signature = '';
+            if(!this.state.loggedIn){
+                if(username === 'Chris'){
+                    signature = userSignatures.user1
+                } else if(username === 'Cindy'){
+                    signature = userSignatures.user2
+                } else if(username === 'Jane'){
+                    signature = userSignatures.user3
+                }
+    
+                this.setState({
+                    loggedIn: true,
+                    username: username,
+                    signature: signature,
+                    password: password
+                })
             }
-
-            this.setState({
-                loggedIn: true,
-                username: username,
-                signature: signature,
-                password: password
-            })
         }
     }
 
