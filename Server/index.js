@@ -6,7 +6,6 @@ const path = require('path');
 const { default: axios } = require('axios');
 app.use(morgan('dev'));
 const dbhelpers = require('./dbhelpers.js');
-const { getTossAndTurns } = require('./dbhelpers.js');
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 app.use(express.static(PUBLIC_DIR))
 

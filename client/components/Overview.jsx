@@ -15,9 +15,8 @@ class OverView extends React.Component {
         super(props)
 
         this.state = {
-            useState: false,
-            signature: this.props.signature,
-            username: this.props.username,
+            signature: '',
+            username: '',
             timeStart: 0,
             sleepStages: [],
             scores: [],
@@ -27,22 +26,29 @@ class OverView extends React.Component {
         }
 
         this.fetchData = this.fetchData.bind(this);
-        this.changeUser = this.changeUser.bind(this);
+        this.changeUserSelector = this.changeUserSelector.bind(this);
         this.handleUserSubmit = this.handleUserSubmit.bind(this);
         this.handleDateSubmit = this.handleDateSubmit.bind(this);
         this.changeDate = this.changeDate.bind(this);
-
     }
 
 
     componentDidMount(){
-        this.fetchData(this.state.signature)
-     }
+        if(this.state.username){
+            this.fetchData(this.state.signature)
+        } else {
+            this.fetchData(this.props.signature)
+            this.setState({
+                username: this.props.username
+            })
+        }
+    }
 
     fetchData(signature){
         axios.get(`/sleepData/${signature}/${this.state.date}`)
         .then((response) => {
             this.setState({
+                signature: signature,
                 timeStart: response.data[0],
                 sleepStages: response.data[1],
                 scores: response.data[2],
@@ -55,22 +61,24 @@ class OverView extends React.Component {
         })
      }    
 
-    changeUser(name){
+    changeUserSelector(name){
         this.setState({
             username: name.target.value
         })
-
         if(name.target.value === "Chris"){
             this.setState({
-                signature: userSignatures.user1
+                signature: userSignatures.user1,
+                username: 'Chris'
             })
         } else if(name.target.value === "Cindy"){
             this.setState({
-                signature: userSignatures.user2
+                signature: userSignatures.user2,
+                username: 'Cindy'
             })
         } else if(name.target.value === "Jane"){
             this.setState({
-                signature: userSignatures.user3
+                signature: userSignatures.user3,
+                username: 'Jane'
             })
         }
     }
@@ -97,8 +105,8 @@ class OverView extends React.Component {
                 <div>               
                     <div id="sleepReport">Sleep Report</div>
                     <div className='selectors'>
-                        <UserSelector username={this.state.username} handleUserSubmit={this.handleUserSubmit} changeUser={this.changeUser}/>
-                        <DateSelector date={this.state.date} handleDateSubmit={this.handleDateSubmit} changeDate={this.changeDate}/>
+                        <UserSelector username={this.state.username} handleUserSubmit={this.handleUserSubmit} changeUserSelector={this.changeUserSelector}/>
+                        <DateSelector date={this.props.date} handleDateSubmit={this.handleDateSubmit} changeDate={this.changeDate}/>
                     </div>
                     <div className="primaryGraphs">
                         <ScoresRadialBarChart sleepScores={this.state.scores}/>
@@ -122,3 +130,5 @@ class OverView extends React.Component {
 }
 
 export default OverView;
+
+// skjda;flj
