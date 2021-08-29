@@ -3,7 +3,6 @@ import React from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import Selector from '../Selector.jsx';
 
 class TossAndTurns extends React.Component {
     constructor(props) {
